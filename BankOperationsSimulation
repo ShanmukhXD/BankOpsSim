@@ -1,0 +1,74 @@
+import java.util.Scanner;
+class BankOperationsSimulation{
+    double principal;
+    long acc, mobno;
+    String name;
+    static final Scanner sc = new Scanner(System.in);
+    void withdrawal(double withdrawAmt){
+        System.out.println("Enter account number: ");
+        if(sc.nextLong() == acc) {
+            if (withdrawAmt <= principal) {
+                principal -= withdrawAmt;
+                System.out.println("Principal amount after withdrawal: " + principal);
+            } else
+                System.out.println("Insufficient balance");
+        } else
+            System.out.println("Re-check account number");
+    }
+    void deposition(double depositAmt){
+        System.out.println("Enter account number: ");
+        if(sc.nextLong() == acc) {
+            principal += depositAmt;
+            System.out.println("Principal amount after deposition: " + principal);
+        } else
+            System.out.println("Re-check account number");
+    }
+    void accept(){
+        System.out.println("Enter name: ");
+        name = sc.nextLine();
+        System.out.println("Enter account number: ");
+        acc = sc.nextLong();
+        System.out.println("Enter mobile number: ");
+        mobno = sc.nextLong();
+        System.out.println("Enter principal amount: ");
+        principal = sc.nextDouble();
+    }
+    void info(){
+        System.out.println("Account Number: " + acc);
+        System.out.println("Name: " + name);
+        System.out.println("Mobile number: " + mobno);
+        System.out.println("Principal amount: " + principal);
+    }
+    public static void main(String[] args) {
+        BankOperationsSimulation ops = new BankOperationsSimulation();
+        ops.accept();
+        while(true) {
+            System.out.println("---MENU---");
+            System.out.println(" 1. Withdraw money\n 2. Deposit money\n 3. Show all info\n 4. Exit");
+            System.out.println("Enter choice number: ");
+            int ch = sc.nextInt();
+
+            switch(ch){
+                case 1:
+                    System.out.println("Enter money to withdraw: ");
+                    double withdrawAmt = sc.nextDouble();
+                    ops.withdrawal(withdrawAmt);;
+                    break;
+                case 2:
+                    System.out.println("Enter money to deposit: ");
+                    double depositAmt = sc.nextDouble();
+                    ops.deposition(depositAmt);
+                    break;
+                case 3:
+                    ops.info();
+                    break;
+                case 4:
+                    System.out.println("Thank you for using!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice number");
+            }
+        }
+    }
+}
